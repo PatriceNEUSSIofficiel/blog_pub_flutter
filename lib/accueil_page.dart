@@ -1,22 +1,65 @@
 import 'package:flutter/material.dart';
-import 'article_page.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+class Article {
+  final String categorie;
+  final String nom;
+  final String imageOuVideo;
+  final String description;
+
+  Article({
+    required this.categorie,
+    required this.nom,
+    required this.imageOuVideo,
+    required this.description,
+  });
+}
 
 class AccueilPage extends StatelessWidget {
+  final String facebookUrl =
+      "https://www.facebook.com/people/Publicit%C3%A9-Sponsoris%C3%A9e/61557517596818/?mibextid=LQQJ4d";
+
+  List<Article> articles = [
+    Article(
+      categorie: 'Digital et Edition',
+      nom: 'Agence de Marketing Digital',
+      imageOuVideo: 'assets/3.jpg',
+      description:
+          'Agence de Marketing Digital Graphisme de production - Edition - Marketing - Développement web RCCM N° RC/YAO/2017/A/1831 NIU : M071718160875T Yaoundé, Cameroun .',
+    ),
+    Article(
+      categorie: 'design',
+      nom: 'Bracelet',
+      imageOuVideo: 'assets/6.jpg',
+      description: 'Bracelet personnalisé et chaines couples (acrylique).',
+    ),
+    Article(
+      categorie: 'appareils électroniques',
+      nom: ' airpods Pro ',
+      imageOuVideo: 'assets/14.jpg',
+      description:
+          'appareils électroniques airpods Pro bleutooh complet et propre.',
+    ),
+    // Ajoutez d'autres articles ici
+  ];
+
   @override
   Widget build(BuildContext context) {
-    final articlesPage = ArticlesPage();
     return Scaffold(
       appBar: AppBar(
         title: Row(
           children: [
-            Text('Nom du Blog'),
+            Text(
+              '📢 publicité sponsorisée',
+              style: TextStyle(color: Colors.white),
+            ),
           ],
         ),
         actions: [
           IconButton(
             icon: Icon(Icons.facebook),
             onPressed: () {
-              // Action à effectuer lors du clic sur le bouton Facebook
+              launch(facebookUrl);
             },
           ),
         ],
@@ -39,7 +82,7 @@ class AccueilPage extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 24.0,
                           fontWeight: FontWeight.bold,
-                          color: Colors.green,
+                          color: Colors.blue,
                         ),
                       ),
                       SizedBox(height: 16.0),
@@ -47,7 +90,7 @@ class AccueilPage extends StatelessWidget {
                         'Présentation de la publicité sponsorisée',
                         style: TextStyle(
                           fontSize: 18.0,
-                          color: Colors.blue,
+                          color: Colors.black,
                         ),
                       ),
                     ],
@@ -70,30 +113,31 @@ class AccueilPage extends StatelessWidget {
                         ),
                       ),
                       SizedBox(height: 16.0),
-                      // ListView.builder(
-                      //   shrinkWrap: true,
-                      //   physics: NeverScrollableScrollPhysics(),
-                      //   itemCount: articlesPage.articles.length,
-                      //   itemBuilder: (context, index) {
-                      //     final article = articlesPage.articles[index];
-                      //     return GestureDetector(
-                      //       onTap: () {
-                      //         // Action à effectuer lorsque l'utilisateur clique sur l'article
-                      //       },
-                      //       child: ListTile(
-                      //         leading: Hero(
-                      //           tag: article.imageUrl,
-                      //           child: CircleAvatar(
-                      //             backgroundImage: AssetImage(article.imageUrl),
-                      //           ),
-                      //         ),
-                      //         title: Text(article.title),
-                      //         subtitle: Text(article.author),
-                      //         trailing: Icon(Icons.arrow_forward),
-                      //       ),
-                      //     );
-                      //   },
-                      // ),
+                      ListView.builder(
+                        shrinkWrap: true,
+                        physics: NeverScrollableScrollPhysics(),
+                        itemCount: articles.length,
+                        itemBuilder: (context, index) {
+                          final article = articles[index];
+                          return GestureDetector(
+                            onTap: () {
+                              Navigator.pushNamed(context, '/articles');
+                            },
+                            child: ListTile(
+                              leading: Hero(
+                                tag: article.imageOuVideo,
+                                child: CircleAvatar(
+                                  backgroundImage:
+                                      AssetImage(article.imageOuVideo),
+                                ),
+                              ),
+                              title: Text(article.nom),
+                              subtitle: Text(article.categorie),
+                              trailing: Icon(Icons.arrow_forward),
+                            ),
+                          );
+                        },
+                      ),
                     ],
                   ),
                 ),

@@ -1,16 +1,40 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class EquipePage extends StatelessWidget {
+  final String facebookUrl =
+      "https://www.facebook.com/people/Publicit%C3%A9-Sponsoris%C3%A9e/61557517596818/?mibextid=LQQJ4d";
   final List<MembreEquipe> membres = [
     MembreEquipe(
-      nom: 'John Doe',
-      photoPath: 'assets/2.jpg',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+      nom: 'Marguerite BISSA',
+      photoPath: 'assets/12.jpg',
+      description: 'Chef d’équipe : Humanités Numériques.',
     ),
     MembreEquipe(
-      nom: 'Jane Smith',
-      photoPath: 'assets/1.jpg',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+      nom: 'TOumpé ERIC',
+      photoPath: 'assets/13.jpg',
+      description:
+          'Professeur des Lycées | Vice Coordonateur National de l’association des Professeurs d’informatique du Cameroun (PIC) | Certifié CISCO en Technologie Web et Sécurité Informatique | Certifié par Google en Cloud Engineering.',
+    ),
+    MembreEquipe(
+      nom: 'Marguerite BISSA',
+      photoPath: 'assets/q.jpg',
+      description: 'Membre de l’équipe',
+    ),
+    MembreEquipe(
+      nom: 'NGWAMBE MARIELLA ',
+      photoPath: 'assets/q.jpg',
+      description: 'Membre de l’équipe',
+    ),
+    MembreEquipe(
+      nom: 'WANSI GILLES',
+      photoPath: 'assets/20.jpg',
+      description: 'Membre de l’équipe',
+    ),
+    MembreEquipe(
+      nom: 'MEKOULOU GRAZIELLA',
+      photoPath: 'assets/q.jpg',
+      description: 'Membre de l’équipe',
     ),
     // Ajoutez d'autres membres de l'équipe ici
   ];
@@ -21,14 +45,17 @@ class EquipePage extends StatelessWidget {
       appBar: AppBar(
         title: Row(
           children: [
-            Text('Équipe'),
+            Text(
+              'Équipe',
+              style: TextStyle(color: Colors.white),
+              ),
           ],
         ),
         actions: [
           IconButton(
             icon: Icon(Icons.facebook),
             onPressed: () {
-              // Action à effectuer lors du clic sur le bouton Facebook
+              launch(facebookUrl);
             },
           ),
         ],
